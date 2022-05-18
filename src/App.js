@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import axios from 'axios';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -29,18 +29,19 @@ class App extends Component {
 
   postData=()=>{
 
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.eklenecekLng)
-  };
+    axios.post('http://localhost:44238/api/langs',this.state.eklenecekLng)
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(this.state.eklenecekLng)
+  // };
 
-    fetch("http://localhost:44238/api/langs",requestOptions)
-    .then((res) => { return res.json() })
-    .then((result) => {
-      console.log(result);
-     // this.setState({ languages: result });
-    });
+  //   fetch("http://localhost:44238/api/langs",requestOptions)
+  //   .then((res) => { return res.json() })
+  //   .then((result) => {
+  //     console.log(result);
+  //    // this.setState({ languages: result });
+  //   });
   }
 
   setEkelencek=(event)=>{
