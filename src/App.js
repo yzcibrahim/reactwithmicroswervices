@@ -63,7 +63,7 @@ class App extends Component {
         <div className='container'>
         <Routes>
           <Route path="/langs" element={<Languages refreshData={this.refreshData} languages={this.state.languages} />} />
-          <Route path="/words" element={<Word  />} />
+          <Route path="/words" element={<Word languages={this.state.languages}  />} />
         </Routes>
           
         </div>
