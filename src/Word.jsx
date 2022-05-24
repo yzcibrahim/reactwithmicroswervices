@@ -61,6 +61,7 @@ const columns = [ {
     name: 'Language',
     selector: row => row.lngId,
     sortable: true,
+    cell: (data) => <span>{props.languages.filter(c=>c.id===data.lngId)[0].name}</span>
 },
 ]
 // const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data.meanings, null, 2)}</pre>;
