@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState,useContext } from "react"
 import DataTable from 'react-data-table-component';
+import userInfo from "./UserStorage"
 
 export default function Word(props)
 {
@@ -8,6 +9,9 @@ export default function Word(props)
     const[eklenecekWord,setEklenecekWord]=useState({id:0,wordDef:'',lngId:0,meanings:[]})
     const[eklenecekMeaning,seteklenecekMeaning]=useState({id:0,meaning:'',lngId:0})
     const[change,setChange]=useState(true);
+
+    const userContext=useContext(userInfo)
+
     const setVals=(event)=>{
         setEklenecekWord(prevState => ({
             ...prevState,
@@ -30,16 +34,17 @@ export default function Word(props)
     }
     const SaveWord=()=>{
         console.log(eklenecekWord);
-        axios.post('http://localhost:32722/api/WordApi',eklenecekWord)
+        axios.post('http://localhost:32722/api/WordApi',
+        eklenecekWord,
+        { headers: {"Authorization" : `Bearer ${userContext.token}`} })
         .then(()=>{
             refreshWords()
         })
     }
 
-    const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inl6YyIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY1MzQ2MDY1OSwiZXhwIjoxNjUzNDYxMjU5LCJpYXQiOjE2NTM0NjA2NTl9.7ZvRUZnnJkwVInJ3eOaccW5p5f7GPCVnywL2J5ffBCM';
     const refreshWords=()=>{
         axios.get('http://localhost:32722/api/WordApi',
-        { headers: {"Authorization" : `Bearer ${token}`} })
+        { headers: {"Authorization" : `Bearer ${userContext.token}`} })
         //.then((res)=> { return res.json()})
         .then((res)=>setWords(res.data));
     }
