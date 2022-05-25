@@ -11,6 +11,7 @@ import {
   Link
 } from "react-router-dom";
 import Word from './Word';
+import WordUser from './WordUser';
 
 class App extends Component {
 
@@ -58,12 +59,16 @@ class App extends Component {
             <li>
               <Link to="/words">Words</Link>
             </li>
+            <li>
+              <Link to="/users">Words</Link>
+            </li>
           </ul>
         </nav>
         <div className='container'>
         <Routes>
           <Route path="/langs" element={<Languages refreshData={this.refreshData} languages={this.state.languages} />} />
           <Route path="/words" element={<Word languages={this.state.languages}  />} />
+          <Route path="/users" element={<WordUser />} />
         </Routes>
           
         </div>
