@@ -49,10 +49,16 @@ export default function Word(props)
         .then((res)=>setWords(res.data));
     }
     useEffect(
-        refreshWords,
-        []
+        ()=>{
+            refreshWords();
+console.log(props.languages)
+        }
+        ,
+        [props.languages]
         )
 
+        if(props.languages.length<=1)
+        return <div>asd</div>
 
 const columns = [ {
     name: 'Id',
@@ -101,7 +107,7 @@ data={data.meanings}
         <div className="row">
             <div className="col-md-4">
                 <div className="form-group">
-                    id:<input name='id' onChange={setVals} value={eklenecekWord.id} readonly type='text' className="form-control" />
+                    id:<input name='id' onChange={setVals} value={eklenecekWord.id} readOnly type='text' className="form-control" />
                 </div>
                 <div className="form-group">
                     word:<input name='wordDef'  onChange={setVals} value={eklenecekWord.wordDef} type='text' className="form-control" />
@@ -120,7 +126,7 @@ data={data.meanings}
             </div>
             <div className="col-md-3"> 
             <div className="form-group">
-                id:<input type='text' name='id' onChange={setmeaningVals} className="form-control" value={eklenecekMeaning.id} />
+                id:<input type='text' readOnly name='id' onChange={setmeaningVals} className="form-control" value={eklenecekMeaning.id} />
             </div>
             <div className="form-group">
                 meaning:<input type='text' onChange={setmeaningVals} name='meaning' className="form-control" value={eklenecekMeaning.meaning} />

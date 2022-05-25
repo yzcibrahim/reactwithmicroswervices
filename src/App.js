@@ -14,11 +14,13 @@ import {
 import Word from './Word';
 import WordUser from './WordUser';
 import Login from './Login';
+import Cookies from 'universal-cookie';
 
 export default function App(){
-  const[languages,setLanguages]=useState({ id: 1, code: 'tr', name: 'türkçe' });
-  const[token,setToken]=useState('');
-  
+  const cookies = new Cookies();
+  const[languages,setLanguages]=useState([{ id: 1, code: 'tr', name: 'türkçe' }]);
+  const[token,setToken]=useState(cookies.get('token'));
+  console.log(cookies.get('token'));
   const refreshData = () => {
     fetch("http://localhost:44238/api/langs")
       .then((res) => { return res.json() })
@@ -45,6 +47,7 @@ export default function App(){
   
 
     console.log("app");
+    console.log(languages)
   //  const[token,setToken]=useState('');
     return (
       <userInfo.Provider value={{token:token,setToken:setToken}}>

@@ -1,11 +1,17 @@
 import axios from "axios"
 import { useState, useContext } from "react"
 import userInfo from "./UserStorage"
+import Cookies from 'universal-cookie';
 
 export default function Login(){
 
     const[userState,setUserState]=useState({userName:'',password:''})
     const userContext=useContext(userInfo)
+
+
+    const cookies = new Cookies();
+// cookies.set('myCat', 'Pacman', { path: '/' });
+// console.log(cookies.get('myCat')); // Pacman
 
     const setVals=(event)=>{
         setUserState(prevState => ({
@@ -20,6 +26,7 @@ export default function Login(){
         .then((res)=>{
             console.log(res);
             userContext.setToken(res.data);
+            cookies.set('token', res.data, { path: '/' });
         })
     }
 
