@@ -36,8 +36,10 @@ export default function Word(props)
         })
     }
 
+    const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Inl6YyIsInJvbGUiOiJhZG1pbiIsIm5iZiI6MTY1MzQ2MDY1OSwiZXhwIjoxNjUzNDYxMjU5LCJpYXQiOjE2NTM0NjA2NTl9.7ZvRUZnnJkwVInJ3eOaccW5p5f7GPCVnywL2J5ffBCM';
     const refreshWords=()=>{
-        axios.get('http://localhost:32722/api/WordApi')
+        axios.get('http://localhost:32722/api/WordApi',
+        { headers: {"Authorization" : `Bearer ${token}`} })
         //.then((res)=> { return res.json()})
         .then((res)=>setWords(res.data));
     }
